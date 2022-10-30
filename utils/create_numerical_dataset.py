@@ -67,14 +67,10 @@ X_train, X_test, y_train, y_test = train_test_split(X_encoded,y)
 # ce.get_embeddings trains NN, extracts embeddings and return a dictionary containing the embeddings
 embeddings = ce.get_embeddings(X_train, y_train, categorical_embedding_info=embedding_info, 
                             is_classification=True, epochs=100,batch_size=256)
-
-# converting to dataframe for easy readibility
-dfs = ce.get_embeddings_in_dataframe(embeddings=embeddings, encoders=encoders)
-
-# including embeddings in the dataset:
+                            
+# include these embeddings in your dataset:
 data = ce.fit_transform(features, embeddings=embeddings, encoders=encoders, drop_categorical_vars=True)
 
-#adding popularity back to the dataset
 data.append(y)
 
 data.to_csv('numerical_dataset_demo.csv')
