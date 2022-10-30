@@ -10,11 +10,16 @@ import datetime
 import seaborn as sns
 import os.path
 
+import subprocess
+
+
+
+
 path = 'demo_audio_features.csv'
-if os.path.isfile(path):
-  print('exist')
-else:
-  print('no')
+if not os.path.isfile(path):
+  exec(open("create_spotify_dataset.py").read())
+  
+
 
 
 '''
