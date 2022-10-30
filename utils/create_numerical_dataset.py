@@ -1,5 +1,11 @@
 '''
 This python code creates a numerical version of the demo dataset
+
+based on: https://towardsdatascience.com/feature-engineering-in-python-part-i-the-most-powerful-way-of-dealing-with-data-8e2447e7c69e
+
+https://github.com/Shivanandroy/CategoricalEmbedder/blob/master/example_notebook/Example%20Notebook.ipynb
+
+
 '''
 
 #import modules 
@@ -15,12 +21,12 @@ from sklearn.model_selection import train_test_split
 import subprocess
 
 #check if the demo dataset exist. If not, create it
-path = 'demo_audio_features.csv'
+path = 'original_dataset_demo.csv'
 if not os.path.isfile(path):
   exec(open("create_spotify_dataset.py").read())
   
 #load the original (demo) dataset
-features = pd.read_csv('demo_audio_features.csv', index_col=[0])
+features = pd.read_csv('original_dataset_demo.csv', index_col=[0])
 
 #removing null values in Name column from the data
 features = features.drop(features.loc[features["Name"].isnull()].index)
