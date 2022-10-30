@@ -93,7 +93,7 @@ for play in total_playlists:
   items = playlists['playlists']['items']
   playlist_items = items[0]
   playlist_id = playlist_items['id']
-  data = [g, playlist_id]
+  data = [genre, playlist_id]
     
 playlist_list.append(data)
 
@@ -131,12 +131,11 @@ playlist = pd.DataFrame(track_list, columns =
                                    'Popularity', 'Acousticness', 'Danceability', 'Energy', 
                                    'Instrumentalness', 'Key', 'Liveness', 'Loudness', 'Mode', 
                                    'Speechiness', 'Tempo', 'Time_signature', 'Valence'])
-#displaying first elements
-print(playlist.head(10))
+#remove duplicates
+playlist = playlist.drop_duplicates()
 
-print("writing to file")
 
 #writing dataframe to csv file 
 playlist.to_csv("demo_audio_features.csv")
 
-print("bye")
+
