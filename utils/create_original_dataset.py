@@ -2,7 +2,10 @@
 This python code demonstrates one method of gathering spotify songs and features. 
 The output is a demo_audio_features.csv file, containing spotify songs and featurse.
 Due to computational time, this code creates a small version of the dataset. 
-The dataset used in the project can be found in the /dataset folder. 
+The dataset used in the project can be found in the /dataset folder.
+
+based on: https://levelup.gitconnected.com/extracting-and-analysing-spotify-tracks-with-python-d1466fc1dfee
+spotify API:  https://developer.spotify.com/dashboard/
 '''
 
 #importing modules 
