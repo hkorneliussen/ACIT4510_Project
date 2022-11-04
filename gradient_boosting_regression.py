@@ -29,11 +29,18 @@ rcParams['figure.figsize'] = 12, 4
 import os
 import sys
 import time
+import pickle
 
 #checking of dataset exists, if not exit
 path = 'dataset/'
 if not os.path.exists(path):
-  print('Please run "setting up environment" cells to download dataset')
+  print('Please run "setting up environment" cells to download datasets')
+  sys.exit()
+
+#checking of dataset exists, if not exit
+path = 'model/'
+if not os.path.exists(path):
+  print('Please run "setting up environment" cells to download models')
   sys.exit()
 
 #loading original dataset
@@ -70,4 +77,19 @@ kf = KFold(n_splits=5, random_state=42, shuffle=True)
 for train_index, val_index in kf.split(X):
   X_train, X_val = X.iloc[train_index], X.iloc[val_index]
   y_train, y_val = y.iloc[train_index], y.iloc[val_index]
+
+# load model from file
+regression_original = pickle.load(open("model/gbm_classification_original.pickle.dat", "rb"))
+
+#getting R2 score on the validation set
+R2_val = regression_original.score(X_val,y_val)
+
+#Getting the ensemble's MSE on the validation set
+predictions = regression_original.predict(X_val)
+MSE = mean_squared_error(y_val,predictions)
+
+#storing metrics
+data = [['R2_val', R2_val], ['MSE', MSE]]
+df_original = pd.DataFrame(data, columns = ['metric', 'value'])
+print(df_original)
 
